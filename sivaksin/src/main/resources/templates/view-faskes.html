@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <title>SIVAKSIN</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFIBw8HfCJo="
+        crossorigin="anonymous"
+    ></script>
+    <script src="https://getbootstrap.com/docs/4.1/assets/js/vendor/popper.min.js"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar('Faskes')"></nav>
+<br><br>
+<div class="container">
+    <div class="card">
+    <div class="card-header" style="text-align:center; font-weight:bold;">
+                 Detail Faskes
+                </div>
+                <br>
+        <div class="card-body">
+            <div class="justify-content-center">
+                <p th:text="'Nama Fasilitas Kesehatan : ' + ${faskes.namaFaskes}"></p>
+                <p th:text="'Kuota : ' + ${faskes.kuotaFaskes}"></p>
+                <p th:text="'Provinsi : ' + ${faskes.provinsiFaskes}"></p>
+                <p th:text="'Kabupaten: ' + ${faskes.kabupatenFaskes}"></p>
+                <p th:text="'Jam Mulai : ' + ${faskes.jamMulai}"></p>
+                <p th:text="'Jam Selesai : ' + ${faskes.jamTutup}"></p>
+                <p th:text="'Jenis Vaksin : ' + ${vaksin.jenisVaksin}"></p>
+                </div>
+                <br>
+                <div class="container" style="text-align:center;">
+                <div style="padding-bottom:5px;">
+                 <a class="btn btn-primary" th:href="@{/faskes/ubah/} + ${faskes.idFaskes}">Ubah</a>
+                </div>
+                <div>
+                    <form th:action="@{/faskes/hapus/} + ${faskes.idFaskes}" method="POST" style="padding-top:0.1px;">
+                        <button class="btn btn-primary" type="submit">Hapus</button>
+                    </form>
+                </div>
+                </div>
+        </div>
+        </div>
+        <br>
+        <div>
+         <a class="btn btn-primary" th:href="@{/faskes/} + ${faskes.idFaskes} + @{/tambah/pasien}">Tambah Pasien</a>
+        </div>
+        </div>
+    <br>
+    <br>
+    <div class="container">
+    <div class="card">
+                <div class="card-header" style="text-align:center; font-weight:bold;">
+                 Daftar Pasien
+                </div>
+                <div class="card-body">
+                <table class="table">
+                            </thead>
+                            <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama</th>
+                                <th>NIK</th>
+                                <th>Nomor Telepon</th>
+                                <th>Jenis Kelamin</th>
+                                <th>Tempat Lahir</th>
+                                <th>Pekerjaan</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="pasien, iterationStatus : ${listPasien}"
+                                th:style = "${iterationStatus.even} ? 'font-weight:bold;'">
+                                <td th:text="${iterationStatus.count}"></td>
+                                <td th:text="${pasien.namaPasien}"></td>
+                                <td th:text="${pasien.nik}"></td>
+                                <td th:text="${pasien.nomorTelepon}"></td>
+                                <td th:if="${pasien.jenisKelamin} == 0">Perempuan</td>
+                                <td th:if="${pasien.jenisKelamin} == 1">Laki-Laki</td>
+                                <td th:text="${pasien.tempatLahir}"></td>
+                                <td th:text="${pasien.pekerjaan}"></td>
+                                </tr>
+                            </tbody>
+                            </table>
+                    </div>
+                    </div>
+                    <div>
+                    <br>
+                    <a class="btn btn-primary" href="/faskes">Kembali</a>
+                    </div>
+                    </div>
+
+</body>
+ 
+</html>

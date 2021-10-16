@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <title>SIVAKSIN</title>
+    <meta charset="UTF-8">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFIBw8HfCJo="
+        crossorigin="anonymous"
+    ></script>
+    <script src="https://getbootstrap.com/docs/4.1/assets/js/vendor/popper.min.js"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar('Pasien')"></nav>
+<br><br>
+<div class="container">
+    <div class="card">
+    <div class="card-header" style="text-align:center; font-weight:bold;">
+                 Detail Pasien
+                </div>
+                <br>
+        <div class="card-body">
+            <div class="justify-content-center">
+                <p th:text="'Nama Pasien : ' + ${pasien.namaPasien}"></p>
+                <p th:text="'NIK : ' + ${pasien.nik}"></p>
+                <p th:text="'Nomor Telepon : ' + ${pasien.nomorTelepon}"></p>
+                <p th:if="${pasien.jenisKelamin} == 0">Jenis Kelamin : Perempuan</p>
+                <p th:if="${pasien.jenisKelamin} == 1">Jenis Kelamin : Laki-Laki</p>
+                <p th:text="'Tanggal Lahir : ' + ${pasien.tanggalLahir}"></p>
+                <p th:text="'Tempat Lahir : ' + ${pasien.tempatLahir}"></p>
+                <p th:text="'Pekerjaan : ' + ${pasien.pekerjaan}"></p>
+                <br>
+                <a class="btn btn-primary" th:href="@{/pasien/ubah/} + ${pasien.idPasien}">ubah</a>
+                </div>
+                </div>
+        </div>
+        <div class="container">
+        <div class="card">
+                <div class="card-header" style="text-align:center; font-weight:bold;">
+                Daftar Vaksinasi
+                </div>
+                <div class="card-body">
+                <table class="table">
+                            <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Nama Faskes</th>
+                                <th>Vaksin</th>
+                                <th>Batch ID</th>
+                                <th>Waktu Suntik</th>
+                                <th>Nama Dokter</th>
+                                <th>NIP Dokter</th>
+                                <th>No Telepon Dokter</th>
+                            </tr>
+                            </thead>
+                             <tbody>
+                            <tr th:each="dp, iterationStatus : ${dp}"
+                                th:style = "${iterationStatus.even} ? 'font-weight:bold;'">
+                                <td th:text="${iterationStatus.count}"></td>
+                                <td th:text="${listFaskes[iterationStatus.count-1].namaFaskes}"></td>
+                                <td th:text="${listFaskes[iterationStatus.count-1].getVaksin().getJenisVaksin()}"></td>
+                                <td th:text="${dp.getBatchId()}"></td>
+                                <td th:text="${dp.getWaktuSuntik()}"></td>
+                                <td th:text="${dp.getDokter().getNamaDokter()}"></td>
+                                <td th:text="${dp.getDokter().getNip()}"></td>
+                                <td th:text="${dp.getDokter().getNomorTelepon()}"></td>
+                                </tr>
+                            </tbody>
+                            </table>
+                    </div>
+                    </div>
+                    </div>
+    <br>
+    <br>
+    <div>
+    <a class="btn btn-primary" href="/pasien">Kembali</a>
+    </div>
+</body>
+ 
+</html>

@@ -23,21 +23,20 @@
  
 <body>
 <nav th:replace="fragments/fragment :: navbar('Home')"></nav>
-<h2 style="text-align: center; margin-top: 2rem;">Selamat Datang Di SIVAKSIN!</h2>
+<h2 style="text-align: center; margin-top: 2rem; font-family:poppins; color:#2C394B; font-weight:bold;">Selamat Datang Di SIVAKSIN!</h2>
 <div class="container">
-    <div class="card">
-                
+    <div class="card bg-light mb-3 mx-auto" style="width:40rem;"> 
         <div class="card-body">
             <p style="text-align:center;">Daftar Fitur</p>
             <div class="justify-content-center d-flex justify-content-center">
                 <div style="padding-top:5px; padding-right:5px">
-                <a class="btn btn-primary" href="/faskes">Faskes</a>
+                <a class="btn btn-outline-info" href="/faskes">Faskes</a>
                 </div>
                 <div style="padding:5px">
-                <a class="btn btn-primary" href="/pasien">Pasien</a>
+                <a class="btn btn-outline-info" href="/pasien">Pasien</a>
                 </div>
                 <div class="dropdown" style="padding:5px">
-  <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" >Cari
+  <a class="btn btn-outline-info dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" >Cari
   </a>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
     <a class="dropdown-item" href="/cari/faskes">Cari Faskes</a>
